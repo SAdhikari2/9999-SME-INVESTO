@@ -1,0 +1,16 @@
+<resources>
+    <string-array name="payment_type_options">
+        <item>All Transactions</item>
+        <item>Cash</item>
+        <item>Online</item>
+        <item>Due</item>
+        <!-- Add more payment types as needed -->
+    </string-array>
+    <string-array name="payment_status_options">
+        <item>All Transactions</item>
+        <item>Paid</item>
+        <item>Due</item>
+        <item>Cancelled</item>
+        <!-- Add more payment statuses as needed -->
+    </string-array>
+</resources>
