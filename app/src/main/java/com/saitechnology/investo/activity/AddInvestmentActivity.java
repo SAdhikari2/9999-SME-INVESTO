@@ -26,8 +26,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AddInvestmentActivity extends AppCompatActivity {
-    private Button btnDepositeDate, btnMaturityDate;
-    private EditText accountIdEditText, bankNameEditText, branchNameEditText, specialNoteEditText;
+    private Button btnDepositDate, btnMaturityDate;
+    private EditText accountNumberEditText, bankNameEditText, branchNameEditText, depositAmountEditText, maturityAmountEditText, statusEditText, remarksEditText;
     private DatabaseReference databaseReference;
     private int selectedYear, selectedMonth, selectedDay;
     private int selectedEndYear, selectedEndMonth, selectedEndDay;
@@ -42,11 +42,14 @@ public class AddInvestmentActivity extends AppCompatActivity {
         firebaseAppCheck.installAppCheckProviderFactory(PlayIntegrityAppCheckProviderFactory.getInstance());
 
         // Initialize views
-        accountIdEditText = findViewById(R.id.accountIdEditText);
+        accountNumberEditText = findViewById(R.id.accountIdEditText);
         bankNameEditText = findViewById(R.id.bankNameEditText);
         branchNameEditText = findViewById(R.id.branchNameEditText);
-        specialNoteEditText = findViewById(R.id.specialNoteEditText);
-        btnDepositeDate = findViewById(R.id.depositeDateBtn);
+        remarksEditText = findViewById(R.id.specialNoteEditText);
+        depositAmountEditText = findViewById(R.id.depositAmountEditText);
+        maturityAmountEditText = findViewById(R.id.maturityAmountEditText);
+        statusEditText = findViewById(R.id.statusEditText);
+        btnDepositDate = findViewById(R.id.depositDateBtn);
         btnMaturityDate = findViewById(R.id.maturityDateBtn);
 
         Button addInvestmentButton = findViewById(R.id.addInvestment);
@@ -62,31 +65,37 @@ public class AddInvestmentActivity extends AppCompatActivity {
         // Initialize database reference
         databaseReference = FirebaseDatabase.getInstance().getReference("InvestmentWarehouse").child(currentUser.getUid());
 
-        btnDepositeDate.setOnClickListener(this::depositeDate);
+        btnDepositDate.setOnClickListener(this::depositDate);
         btnMaturityDate.setOnClickListener(this::maturityDate);
         // Set click listener for the update profile button
-        addInvestmentButton.setOnClickListener(v -> addInvestment(currentUser.getUid()));
+        addInvestmentButton.setOnClickListener(v -> addInvestment());
     }
 
-    private void addInvestment(String userId) {
+    private void addInvestment() {
         Intent intentMain = new Intent(AddInvestmentActivity.this, MainActivity.class);
 
         // Get All the text values
-        String accountId = accountIdEditText.getText().toString().trim();
+        String accountId = accountNumberEditText.getText().toString().trim();
         String bankName = bankNameEditText.getText().toString().trim();
         String branchName = branchNameEditText.getText().toString().trim();
         String depositDate = formatDate(selectedYear, selectedMonth, selectedDay);
         String maturityDate = formatDate(selectedEndYear, selectedEndMonth, selectedEndDay);
-        String specialNote = specialNoteEditText.getText().toString().trim();
+        String specialNote = remarksEditText.getText().toString().trim();
+        String depositAmount = depositAmountEditText.getText().toString().trim();
+        String maturityAmount = maturityAmountEditText.getText().toString().trim();
+        String status = statusEditText.getText().toString().trim();
 
         InvestmentWarehouse investmentWarehouse =
                 InvestmentWarehouse.builder()
-                        .accountId(accountId)
+                        .accountNumber(accountId)
                         .bankName(bankName)
                         .branchName(branchName)
-                        .depositeDate(depositDate)
+                        .depositDate(depositDate)
                         .maturityDate(maturityDate)
-                        .specialNotes(specialNote)
+                        .depositAmount(depositAmount)
+                        .maturityAmount(maturityAmount)
+                        .status(status)
+                        .remarks(specialNote)
                         .transactionTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()))
                         .build();
 
@@ -109,7 +118,7 @@ public class AddInvestmentActivity extends AppCompatActivity {
         return String.format(Locale.getDefault(), "%d-%02d-%02d", year, month + 1, day);
     }
 
-    public void depositeDate(View view) {
+    public void depositDate(View view) {
         final Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.get(Calendar.YEAR);
         int currentMonth = calendar.get(Calendar.MONTH);
@@ -125,7 +134,7 @@ public class AddInvestmentActivity extends AppCompatActivity {
                     if (selectedEndYear != 0 && (year > selectedEndYear || (year == selectedEndYear && month > selectedEndMonth) || (year == selectedEndYear && month == selectedEndMonth && day > selectedEndDay))) {
                         Toast.makeText(this, "Deposit date cannot be after maturity date", Toast.LENGTH_SHORT).show();
                     } else {
-                        btnDepositeDate.setText(getString(R.string.selected_date_format, year, month + 1, day));
+                        btnDepositDate.setText(getString(R.string.selected_date_format, year, month + 1, day));
                     }
                 }, currentYear, currentMonth, currentDay);
 

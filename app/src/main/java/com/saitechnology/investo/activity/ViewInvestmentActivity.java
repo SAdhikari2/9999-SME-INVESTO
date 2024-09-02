@@ -73,6 +73,7 @@ public class ViewInvestmentActivity extends AppCompatActivity {
                             Date date1 = dateFormat.parse(date1Str);
                             Date date2 = dateFormat.parse(date2Str);
 
+                            assert date1 != null;
                             return date1.compareTo(date2); // Ascending order
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -83,7 +84,7 @@ public class ViewInvestmentActivity extends AppCompatActivity {
 
                 // Display sorted records
                 for (DataSnapshot snapshot : records) {
-                    String accountId = snapshot.child("accountId").getValue(String.class);
+                    String accountNumber = snapshot.child("accountNumber").getValue(String.class);
                     String maturityDate = snapshot.child("maturityDate").getValue(String.class);
 
                     // Creating a new TextView for each record
@@ -92,7 +93,7 @@ public class ViewInvestmentActivity extends AppCompatActivity {
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                     ));
-                    recordView.setText("Account ID: " + (accountId != null ? accountId : "N/A") +
+                    recordView.setText("Account Number: " + (accountNumber != null ? accountNumber : "N/A") +
                             "\nMaturity Date: " + (maturityDate != null ? maturityDate : "N/A"));
                     recordView.setPadding(16, 16, 16, 16);
                     recordView.setTextSize(18f);
@@ -100,7 +101,7 @@ public class ViewInvestmentActivity extends AppCompatActivity {
                     recordView.setBackgroundResource(R.drawable.edittext_background);
                     recordView.setOnClickListener(v -> {
                         // Create an intent to view the full details
-                        Intent intent = new Intent(ViewInvestmentActivity.this, MainActivity.class);
+                        Intent intent = new Intent(ViewInvestmentActivity.this, InvestmentDetailActivity.class);
                         intent.putExtra("investmentId", snapshot.getKey());
                         startActivity(intent);
                     });

@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class InvestmentWarehouse implements Serializable {
-    String userId, accountId, bankName, branchName, transactionTime, depositeDate, maturityDate, specialNotes;
+    String userId, accountNumber, depositAmount, maturityAmount, bankName, branchName, transactionTime, depositDate, maturityDate, status, remarks;
 }

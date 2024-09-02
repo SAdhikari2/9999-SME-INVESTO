@@ -55,6 +55,7 @@
         <activity android:name="com.saitechnology.investo.activity.PdfGenerateActivity" />
         <activity android:name="com.saitechnology.investo.activity.AddInvestmentActivity" />
         <activity android:name="com.saitechnology.investo.activity.ViewInvestmentActivity" />
+        <activity android:name="com.saitechnology.investo.activity.InvestmentDetailActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
