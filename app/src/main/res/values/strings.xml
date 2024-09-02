@@ -47,16 +47,8 @@
     <string name="profit_loss">Profit / Loss</string>
     <string name="welcome_nto_investo">Welcome \nto Investo</string>
     <string name="get_started">Get Started</string>
-    <string name="enter_your_email">Enter Your Email</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="enter_your_password">Enter Your Password</string>
-    <string name="or_login_using">Or Login Using</string>
-    <string name="don_t_remember_password_recovery_it">Don\'t Remember Password? Recovery It</string>
     <string name="hi_nplease_login">Hi, \nPlease Login</string>
     <string name="google">Sign In With Google</string>
-    <string name="facebook">Facebook</string>
-    <string name="login">Login</string>
     <string name="forget_password">Forget Password</string>
     <string name="total_cash_in">Total Cash In:</string>
     <string name="total_cash_out">Total Cash Out:</string>

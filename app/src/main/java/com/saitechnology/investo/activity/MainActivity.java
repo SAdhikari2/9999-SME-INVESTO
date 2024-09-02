@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -15,12 +14,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.appcheck.FirebaseAppCheck;
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.saitechnology.investo.R;
-import com.saitechnology.investo.entity.TransactionHistory;
 import com.saitechnology.investo.util.ProgressUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -57,30 +51,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view instanceof AppCompatButton) {
-            startActivity(new Intent(MainActivity.this, CashFlowAnalysisActivity.class));;
+            handleButtonClick((AppCompatButton) view);
         }
     }
 
-    private void saveTransactionAndNavigate(String userId, String buttonText, TransactionHistory transactionHistory) {
-        Intent intentMain = new Intent(MainActivity.this, MainActivity.class);
-        transactionHistory.setPaymentType(buttonText);
-        transactionHistory.setUserId(userId);
-        transactionHistory.setPaymentStatus(buttonText.equals("Cash") ? "Paid" : buttonText);
+    private void handleButtonClick(AppCompatButton button) {
+        String buttonText = button.getText().toString();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TransactionHistory").child(userId);
-        databaseReference.child(transactionHistory.getTransactionTime()).setValue(transactionHistory)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        isProgressVisible = ProgressUtils.toggleProgressVisibility(progressBar, isProgressVisible);
-                        Toast.makeText(MainActivity.this, "Successfully Updated", Toast.LENGTH_SHORT).show();
-                        startActivity(intentMain);
-                        finish();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Failed to update transaction data", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(MainActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+        if (buttonText.equals("Add Investment")) {
+            isProgressVisible = ProgressUtils.toggleProgressVisibility(progressBar, isProgressVisible);
+            startActivity(new Intent(MainActivity.this, CashFlowAnalysisActivity.class));
+        } else if (buttonText.equals("View Investment")) {
+            isProgressVisible = ProgressUtils.toggleProgressVisibility(progressBar, isProgressVisible);
+            startActivity(new Intent(MainActivity.this, CashFlowAnalysisActivity.class));
+        }
     }
 }
