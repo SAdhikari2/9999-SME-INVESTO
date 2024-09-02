@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    packagingOptions {
+        pickFirst 'META-INF/DEPENDENCIES'
+    }
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.saitechnology.investo"
+        minSdk 23
+        targetSdk 34
+        versionCode 8
+        versionName "2.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    namespace 'com.saitechnology.investo'
+}
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-ads:23.3.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.faendir.rhino:rhino-android:1.5.2'
+    implementation 'com.google.firebase:firebase-database:21.0.0'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation platform('com.google.firebase:firebase-bom:33.2.0')
+    implementation 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.caverock:androidsvg:1.4'
+    implementation 'com.google.firebase:firebase-auth'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.biometric:biometric:1.1.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'com.itextpdf:itextg:5.5.10'
+    implementation 'com.google.firebase:firebase-firestore:25.1.0'
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation 'com.google.api-client:google-api-client-android:1.30.9'
+    implementation 'com.google.http-client:google-http-client-android:1.39.2'
+    implementation 'com.google.api-client:google-api-client-gson:1.30.9'
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
+    implementation 'com.google.android.play:integrity:1.4.0'
+    implementation('org.apache.httpcomponents:httpclient:4.5.14') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore'
+    }
+}
+apply plugin: 'com.google.gms.google-services'

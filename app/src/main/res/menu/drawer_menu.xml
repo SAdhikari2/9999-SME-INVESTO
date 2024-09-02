@@ -1,0 +1,43 @@
+<!-- res/menu/drawer_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group1">
+
+        <item
+            android:icon="@drawable/business"
+            android:id="@+id/nav_business_details"
+            android:title="@string/business_details" />
+
+    </group>
+
+    <group android:id="@+id/group2">
+
+        <item
+            android:icon="@drawable/account_statement"
+            android:id="@+id/nav_account_statement"
+            android:title="@string/account_statement" />
+        <item
+            android:icon="@drawable/profit_loss"
+            android:id="@+id/nav_cash_flow_analysis"
+            android:title="@string/profit_loss" />
+
+    </group>
+
+    <group android:id="@+id/group3">
+
+        <item
+            android:icon="@drawable/contact"
+            android:id="@+id/nav_contact_us"
+            android:title="@string/contact_us" />
+        <item
+            android:icon="@drawable/share"
+            android:id="@+id/nav_share"
+            android:title="@string/share" />
+        <item
+            android:icon="@drawable/business_details"
+            android:id="@+id/nav_logout"
+            android:title="@string/logout" />
+
+    </group>
+
+</menu>

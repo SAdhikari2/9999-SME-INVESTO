@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "571756216027",
+    "project_id": "investo-ed634",
+    "storage_bucket": "investo-ed634.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571756216027:android:ae8bd2d6bf71cd4ee696fe",
+        "android_client_info": {
+          "package_name": "com.saitechnology.investo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571756216027-v1m7iehpka3krqmp9nb0rks5otdo05tp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saitechnology.investo",
+            "certificate_hash": "7347a8b61311c3ff14f35ba2c89de6c746b8ca1e"
+          }
+        },
+        {
+          "client_id": "571756216027-vn2s1qeinemnnjj9mpuhkei2gk15vl9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDESHpQ7Iw2oh3iwPA5pQl8zOwJHJbWHmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571756216027-vn2s1qeinemnnjj9mpuhkei2gk15vl9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
