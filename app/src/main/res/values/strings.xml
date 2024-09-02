@@ -22,8 +22,6 @@
     <string name="close_bracket">)</string>
     <string name="open_bracket">(</string>
     <string name="backspace">C</string>
-    <string name="online">Online</string>
-    <string name="cash">Cash</string>
     <string name="due">Due</string>
     <string name="payment_method">Payment Method</string>
     <string name="paid">Paid</string>
@@ -64,9 +62,6 @@
     <string name="total_cash_out">Total Cash Out:</string>
     <string name="goto_pos_home">Go to POS Home</string>
     <string name="hi_nyour_profit_loss_nstatement">Hi,\nYour Profit Loss\nStatement</string>
-    <string name="select_the_desired_payment_method">Select Desired Payment Method</string>
-    <string name="plaese_select_npayment_method">Plaese Select \nPayment Method</string>
-    <string name="please_add_your_vpa_upi_id_and_name_which_is_associated_with_eg_gpay_phonepe_bharatpe_etc">Please add your VPA (UPI Id) and Name which is associated with eg. Gpay / Phonepe/ Bharatpe etc</string>
     <string name="okay">Okay</string>
     <string name="cancel">Cancel</string>
     <string name="enter_your_name">Enter your name</string>
@@ -96,4 +91,8 @@
     <string name="use_gpay_phonepe_paytm_or_any_other_upi_payment_app_to_make_the_payment">Use Gpay / Phonepe / Paytm or any other UPI payment app to make the payment</string>
     <string name="default_web_client_id">571756216027-v1m7iehpka3krqmp9nb0rks5otdo05tp.apps.googleusercontent.com</string>
     <string name="keep_track_all_of_your_investments">Keep Track All Of Your Investments</string>
+    <string name="add_investment">Add Investment</string>
+    <string name="view_investment">View Investment</string>
+    <string name="please_select_nsuitable_action">Please Select \nSuitable Action</string>
+    <string name="select_preferable_action">Select Preferable Action</string>
 </resources>
