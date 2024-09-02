@@ -3,7 +3,6 @@ package com.saitechnology.investo.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -15,12 +14,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.appcheck.FirebaseAppCheck;
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory;
 import com.saitechnology.investo.R;
-import com.saitechnology.investo.util.ProgressUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private ProgressBar progressBar;
-    boolean isProgressVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
         firebaseAppCheck.installAppCheckProviderFactory(PlayIntegrityAppCheckProviderFactory.getInstance());
 
-        progressBar = findViewById(R.id.idPBLoading);
-
         MobileAds.initialize(this, initializationStatus -> {});
         AdView adView1 = findViewById(R.id.adView1);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -41,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         assignClickListener(R.id.button_add_investment);
         assignClickListener(R.id.button_view_investment);
-        assignClickListener(R.id.button_due);
     }
 
     private void assignClickListener(int id) {
@@ -59,11 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String buttonText = button.getText().toString();
 
         if (buttonText.equals("Add Investment")) {
-            isProgressVisible = ProgressUtils.toggleProgressVisibility(progressBar, isProgressVisible);
-            startActivity(new Intent(MainActivity.this, CashFlowAnalysisActivity.class));
+            startActivity(new Intent(MainActivity.this, AddInvestmentActivity.class));
         } else if (buttonText.equals("View Investment")) {
-            isProgressVisible = ProgressUtils.toggleProgressVisibility(progressBar, isProgressVisible);
-            startActivity(new Intent(MainActivity.this, CashFlowAnalysisActivity.class));
+            startActivity(new Intent(MainActivity.this, ViewInvestmentActivity.class));
         }
     }
 }

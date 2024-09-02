@@ -51,15 +51,10 @@
         <activity android:name="com.saitechnology.investo.activity.LoginActivity" />
         <activity android:name="com.saitechnology.investo.activity.LogoutActivity" />
         <activity android:name="com.saitechnology.investo.activity.ContactUsActivity" />
-        <activity android:name="com.saitechnology.investo.activity.ShareActivity" />
-        <activity android:name="com.saitechnology.investo.activity.BusinessDetailsActivity" />
-        <activity android:name="com.saitechnology.investo.activity.ForgetPasswordActivity" />
         <activity android:name="com.saitechnology.investo.activity.MainActivity" />
-        <activity android:name="com.saitechnology.investo.activity.PaymentActivity" />
-        <activity android:name="com.saitechnology.investo.activity.QrActivity" />
         <activity android:name="com.saitechnology.investo.activity.PdfGenerateActivity" />
-        <activity android:name="com.saitechnology.investo.activity.PLStatementActivity" />
-        <activity android:name="com.saitechnology.investo.activity.CashFlowAnalysisActivity" />
+        <activity android:name="com.saitechnology.investo.activity.AddInvestmentActivity" />
+        <activity android:name="com.saitechnology.investo.activity.ViewInvestmentActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

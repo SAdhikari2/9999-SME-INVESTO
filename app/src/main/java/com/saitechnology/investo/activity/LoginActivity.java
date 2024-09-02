@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.saitechnology.investo.R;
-import com.saitechnology.investo.util.ProgressUtils;
 
 import java.util.Calendar;
 import java.util.concurrent.Executor;
@@ -36,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
     private GoogleSignInClient googleSignInClient;
-    private boolean isProgressVisible = false;
     private int RC_SIGN_IN = 20;
 
     @Override
