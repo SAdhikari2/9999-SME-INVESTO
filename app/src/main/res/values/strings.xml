@@ -47,8 +47,7 @@
     <string name="account_statement">Account Statement</string>
     <string name="view_p_l_statement">View P/L statement</string>
     <string name="profit_loss">Profit / Loss</string>
-    <string name="get_yourself_ready_with_world_s_nsimplest_point_of_sale">Get Yourself Ready With World\'s \nSimplest Point Of Sale</string>
-    <string name="welcome_nto_mpos">Welcome \nto mPOS</string>
+    <string name="welcome_nto_investo">Welcome \nto Investo</string>
     <string name="get_started">Get Started</string>
     <string name="enter_your_email">Enter Your Email</string>
     <string name="email">Email</string>
@@ -95,4 +94,6 @@
     <string name="type_you_message">Type your message …</string>
     <string name="hi_nreset_your_password">Hi,\nReset Your Password</string>
     <string name="use_gpay_phonepe_paytm_or_any_other_upi_payment_app_to_make_the_payment">Use Gpay / Phonepe / Paytm or any other UPI payment app to make the payment</string>
+    <string name="default_web_client_id">571756216027-v1m7iehpka3krqmp9nb0rks5otdo05tp.apps.googleusercontent.com</string>
+    <string name="keep_track_all_of_your_investments">Keep Track All Of Your Investments</string>
 </resources>
