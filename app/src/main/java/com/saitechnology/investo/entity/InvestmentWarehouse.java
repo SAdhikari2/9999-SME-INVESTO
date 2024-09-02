@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TransactionHistory implements Serializable {
-    String userId,transactionId, itemValues, totalValue, cashEntry, paymentType, paymentStatus, transactionTime, name, vpa, businessName;
+public class InvestmentWarehouse implements Serializable {
+    String userId, accountId, bankName, branchName, transactionTime, depositeDate, maturityDate, specialNotes;
 }

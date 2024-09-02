@@ -87,4 +87,17 @@
     <string name="please_select_nsuitable_action">Please Select \nSuitable Action</string>
     <string name="select_preferable_action">Select Preferable Action</string>
     <string name="hi_nplease_add_your_ninvestment_ndetails">Hi, \nPlease Add Your\nInvestment\nDetails</string>
+    <string name="account_investment_id">Account / Investment Id</string>
+    <string name="bank_firm_name">Bank / Firm Name</string>
+    <string name="branch_name">Branch Name</string>
+    <string name="enter_your_account_number">Enter Your Account Number</string>
+    <string name="enter_your_bank_name">Enter Your Bank Name</string>
+    <string name="enter_branch_name">Enter Branch Name</string>
+    <string name="special_notes">Special Notes</string>
+    <string name="enter_any_important_note_if_necessary">Enter Any Important Note If Necessary</string>
+    <string name="select_date_of_deposit">Select Date Of Deposit</string>
+    <string name="date_of_deposit">Date Of Deposit</string>
+    <string name="select_date_of_maturity">Select Date Of Maturity</string>
+    <string name="date_of_maturity">Date Of Maturity</string>
+    <string name="your_investments">Your Investments</string>
 </resources>

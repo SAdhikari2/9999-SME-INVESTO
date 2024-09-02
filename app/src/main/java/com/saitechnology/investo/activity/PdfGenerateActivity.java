@@ -72,8 +72,6 @@ public class PdfGenerateActivity extends AppCompatActivity {
     private Button btnStartDate, btnEndDate;
     private int selectedYear, selectedMonth, selectedDay;
     private int selectedEndYear, selectedEndMonth, selectedEndDay;
-    private ProgressBar progressBar;
-    boolean isProgressVisible = false;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -84,8 +82,6 @@ public class PdfGenerateActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
         firebaseAppCheck.installAppCheckProviderFactory(PlayIntegrityAppCheckProviderFactory.getInstance());
-
-        progressBar = findViewById(R.id.idPBLoading);
 
         MobileAds.initialize(this, initializationStatus -> {});
         AdView adView = findViewById(R.id.adView);
@@ -122,7 +118,6 @@ public class PdfGenerateActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please select start and end dates", Toast.LENGTH_SHORT).show();
                 return;
             }
-            isProgressVisible = ProgressUtils.toggleProgressVisibility(progressBar, isProgressVisible);
             myPermissions();
         });
 
@@ -389,7 +384,6 @@ public class PdfGenerateActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                     document.close();
-                    isProgressVisible = ProgressUtils.toggleProgressVisibility(progressBar, isProgressVisible);
                     Toast.makeText(PdfGenerateActivity.this, "PDF generated successfully", Toast.LENGTH_SHORT).show();
                     createNotification(filePath);
                 }
@@ -410,7 +404,6 @@ public class PdfGenerateActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    isProgressVisible = ProgressUtils.toggleProgressVisibility(progressBar, isProgressVisible);
                     Toast.makeText(PdfGenerateActivity.this, "Failed to retrieve data from Firebase", Toast.LENGTH_SHORT).show();
                 }
             });
