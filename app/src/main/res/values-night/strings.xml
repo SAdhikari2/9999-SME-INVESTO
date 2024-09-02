@@ -62,7 +62,6 @@
     <string name="share">Share</string>
     <string name="logout">Logout</string>
     <string name="mpos_nquick_menu">mPOS \nQuick Menu</string>
-    <string name="hi_nplease_update_your_nbusiness_ndetails">Hi, \nPlease Update Your\nBusiness\nDetails</string>
     <string name="name">Name (As per Bank Account)</string>
     <string name="enter_your_bank_account_name">Enter Your Bank Account Name</string>
     <string name="business_name">Business Name</string>
@@ -82,4 +81,5 @@
     <string name="view_investment">View Investment</string>
     <string name="please_select_nsuitable_action">Please Select \nSuitable Action</string>
     <string name="select_preferable_action">Select Preferable Action</string>
+    <string name="hi_nplease_add_your_ninvestment_ndetails">Hi, \nPlease Add Your\nInvestment\nDetails</string>
 </resources>

@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         assignClickListener(R.id.button_add_investment);
         assignClickListener(R.id.button_view_investment);
-        assignClickListener(R.id.button_due);
     }
 
     private void assignClickListener(int id) {
