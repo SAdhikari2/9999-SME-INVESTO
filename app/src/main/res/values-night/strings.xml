@@ -82,7 +82,7 @@
     <string name="please_select_nsuitable_action">Please Select \nSuitable Action</string>
     <string name="select_preferable_action">Select Preferable Action</string>
     <string name="hi_nplease_add_your_ninvestment_ndetails">Hi, \nPlease Add Your\nInvestment\nDetails</string>
-    <string name="account_investment_id">Account / Investment Id</string>
+    <string name="account_investment_id">Account / Investment Number</string>
     <string name="bank_firm_name">Bank / Firm Name</string>
     <string name="branch_name">Branch Name</string>
     <string name="enter_your_account_number">Enter Your Account Number</string>
@@ -95,4 +95,19 @@
     <string name="select_date_of_maturity">Select Date Of Maturity</string>
     <string name="date_of_maturity">Date Of Maturity</string>
     <string name="your_investments">Your Investments</string>
+    <string name="deposit_amount">Deposit Amount</string>
+    <string name="maturity_amount">Maturity Amount</string>
+    <string name="status">Status</string>
+    <string name="enter_current_status_of_investment">Enter Current Status Of Investment</string>
+    <string name="enter_maturity_amount_if_you_know">Enter Maturity Amount If You Know</string>
+    <string name="enter_deposit_amount">Enter Deposit Amount</string>
+    <string name="investment_details">Hi, \nPlease Find Your \nInvestment \nDetails</string>
+    <string name="update_details">Update Details</string>
+    <string name="remarks">Remarks:</string>
+    <string name="maturity_date">Maturity Date:</string>
+    <string name="deposit_date">Deposit Date:</string>
+    <string name="bank_name">Bank Name:</string>
+    <string name="account_number">Account Number:</string>
+    <string name="hi_nupdate_your_ninvestment_ndetails">Hi, \nUpdate Your \nInvestment \nDetails</string>
+    <string name="hi_nplease_findyour_nall_investment_ndetails">Hi, \nPlease FindYour \nAll Investment \nDetails</string>
 </resources>
