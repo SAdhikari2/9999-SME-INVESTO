@@ -1,8 +1,10 @@
 package com.saitechnology.investo.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,14 @@ public class InvestmentDetailActivity extends AppCompatActivity {
         if (user != null) {
             loadInvestmentDetails(user.getUid());
         }
+        // Add this in the InvestmentDetailActivity where you want to trigger the update
+        Button updateDetailsButton = findViewById(R.id.updateButton);
+        updateDetailsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(InvestmentDetailActivity.this, UpdateInvestmentActivity.class);
+            intent.putExtra("investmentId", getIntent().getStringExtra("investmentId"));
+            startActivity(intent);
+        });
+
     }
 
     private void loadInvestmentDetails(String userId) {

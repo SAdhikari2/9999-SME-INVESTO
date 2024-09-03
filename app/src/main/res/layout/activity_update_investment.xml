@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    tools:context=".UpdateInvestmentActivity">
+
+    <!-- Top Background Image -->
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/top_background" />
+
+    <!-- Title Text -->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/hi_nupdate_your_ninvestment_ndetails"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/updateButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Linear Layout for Investment Details -->
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <!-- Account Number -->
+            <EditText
+                android:id="@+id/accountNumberView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/account_number"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="text" />
+
+            <!-- Deposit Amount -->
+            <EditText
+                android:id="@+id/depositAmountView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Deposit Amount"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="numberDecimal" />
+
+            <!-- Maturity Amount -->
+            <EditText
+                android:id="@+id/maturityAmountView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Maturity Amount"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="numberDecimal" />
+
+            <!-- Bank Name -->
+            <EditText
+                android:id="@+id/bankNameView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/bank_name"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="text" />
+
+            <!-- Branch Name -->
+            <EditText
+                android:id="@+id/branchNameView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Branch Name"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="text" />
+
+            <!-- Deposit Date -->
+            <EditText
+                android:id="@+id/depositDateView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/deposit_date"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="date" />
+
+            <!-- Maturity Date -->
+            <EditText
+                android:id="@+id/maturityDateView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/maturity_date"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="date" />
+
+            <!-- Status -->
+            <EditText
+                android:id="@+id/statusView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Status"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="text" />
+
+            <!-- Remarks -->
+            <EditText
+                android:id="@+id/remarksView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/remarks"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="text" />
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/updateButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:text="@string/update_details"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
