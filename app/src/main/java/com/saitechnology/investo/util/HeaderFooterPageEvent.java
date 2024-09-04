@@ -31,7 +31,7 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
         PdfContentByte canvas = writer.getDirectContent();
 
         // Add Header
-        String headerText = "-----Account Statement-----";
+        String headerText = "----- Investment Details -----";
         float headerWidth = baseFont.getWidthPoint(headerText, headerFont.getSize());
         float headerX = (document.right() - document.left() - headerWidth) / 2 + document.leftMargin();
         float headerY = document.top() + 10; // Adjust as needed
@@ -42,7 +42,7 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
         canvas.endText();
 
         // Add Footer
-        String footerText = "Developed by mPOS Team";
+        String footerText = "Developed by Saitechnology";
         float footerWidth = baseFont.getWidthPoint(footerText, footerFont.getSize());
         float footerX = (document.right() - document.left() - footerWidth) / 2 + document.leftMargin();
         float footerY = document.bottom() - 10; // Adjust as needed
