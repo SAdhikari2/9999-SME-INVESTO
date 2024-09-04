@@ -109,5 +109,6 @@
     <string name="bank_name">Bank Name:</string>
     <string name="account_number">Account Number:</string>
     <string name="hi_nupdate_your_ninvestment_ndetails">Hi, \nUpdate Your \nInvestment \nDetails</string>
-    <string name="hi_nplease_findyour_nall_investment_ndetails">Hi, \nPlease FindYour \nAll Investment \nDetails</string>
+    <string name="hi_nplease_findyour_nall_investment_ndetails">Hi, \nPlease Find Your \nInvestment \nDetails</string>
+    <string name="remarks_">Remarks</string>
 </resources>
