@@ -64,6 +64,8 @@ dependencies {
     implementation 'com.google.api-client:google-api-client-gson:1.30.9'
     implementation("com.google.firebase:firebase-appcheck-playintegrity")
     implementation 'com.google.android.play:integrity:1.4.0'
+    implementation 'com.madgag.spongycastle:core:1.58.0.0'
+    implementation 'com.madgag.spongycastle:prov:1.58.0.0'
     implementation('org.apache.httpcomponents:httpclient:4.5.14') {
         exclude group: 'org.apache.httpcomponents', module: 'httpcore'
     }

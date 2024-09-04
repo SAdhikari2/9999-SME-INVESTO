@@ -57,6 +57,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -179,6 +180,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     + File.separator + "Investment_Statement_" + formattedDate + ".pdf";
 
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
+
+            // Retrieve the current user's UID
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            assert user != null;
+            String userPassword = Objects.requireNonNull(user.getEmail()).split("@")[0];
+
+            // Set password protection on the PDF
+            writer.setEncryption(userPassword.getBytes(), userPassword.getBytes(),
+                    PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128);
 
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
             Font footerFont = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL);
