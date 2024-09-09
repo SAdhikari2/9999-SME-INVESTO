@@ -120,4 +120,5 @@
     <string name="active">Active</string>
     <string name="matured">Matured</string>
     <string name="closed">Closed</string>
+    <string name="use_fingerprint">Use Fingerprint</string>
 </resources>
