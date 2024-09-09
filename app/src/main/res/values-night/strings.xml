@@ -112,4 +112,7 @@
     <string name="hi_nplease_findyour_nall_investment_ndetails">Hi, \nPlease Find Your \nInvestment \nDetails</string>
     <string name="remarks_">Remarks</string>
     <string name="export_investment_pdf">Export Investment Pdf</string>
+    <string name="active">Active</string>
+    <string name="matured">Matured</string>
+    <string name="closed">Closed</string>
 </resources>
