@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,11 +37,12 @@ import java.util.List;
 public class ViewInvestmentActivity extends AppCompatActivity {
 
     private LinearLayout recordList;
-    private List<DataSnapshot> allRecords = new ArrayList<>();
+    private final List<DataSnapshot> allRecords = new ArrayList<>();
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     private CheckBox checkBoxActive, checkBoxMatured, checkBoxClosed;
+    private EditText searchInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,10 @@ public class ViewInvestmentActivity extends AppCompatActivity {
         checkBoxActive = findViewById(R.id.checkBoxActive);
         checkBoxMatured = findViewById(R.id.checkBoxMatured);
         checkBoxClosed = findViewById(R.id.checkBoxClosed);
+
+        // Initialize search input and button
+        searchInput = findViewById(R.id.searchInput);
+        Button searchButton = findViewById(R.id.searchButton);
 
         ImageView userProfileIcon = findViewById(R.id.userProfileIcon);
         ProfileImageUtil.loadProfileImage(this, userProfileIcon);
@@ -90,6 +97,10 @@ public class ViewInvestmentActivity extends AppCompatActivity {
         checkBoxActive.setOnCheckedChangeListener((buttonView, isChecked) -> filterAndDisplayRecords());
         checkBoxMatured.setOnCheckedChangeListener((buttonView, isChecked) -> filterAndDisplayRecords());
         checkBoxClosed.setOnCheckedChangeListener((buttonView, isChecked) -> filterAndDisplayRecords());
+
+        // Set up the search button functionality
+        searchButton.setOnClickListener(v -> searchByAccountNumber());
+
         // Make the profile icon clickable
         ProfileImageUtil.setupProfileIconClick(this, userProfileIcon);
     }
@@ -147,8 +158,41 @@ public class ViewInvestmentActivity extends AppCompatActivity {
             }
         });
 
-        // Display the filtered and sorted records
-        for (DataSnapshot snapshot : filteredRecords) {
+        displayRecords(filteredRecords);
+    }
+
+    // Method to search by account number and display the relevant record
+    private void searchByAccountNumber() {
+        String searchText = searchInput.getText().toString().trim();
+        if (searchText.isEmpty()) {
+            Toast.makeText(this, "Please enter an account number", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        List<DataSnapshot> filteredRecords = new ArrayList<>();
+
+        for (DataSnapshot snapshot : allRecords) {
+            String accountNumber = snapshot.child("accountNumber").getValue(String.class);
+
+            if (accountNumber != null && accountNumber.equalsIgnoreCase(searchText)) {
+                filteredRecords.add(snapshot);
+                break; // Since account numbers are unique, stop searching after a match is found
+            }
+        }
+
+        if (filteredRecords.isEmpty()) {
+            Toast.makeText(this, "No record found with the entered account number", Toast.LENGTH_SHORT).show();
+        } else {
+            displayRecords(filteredRecords);
+        }
+    }
+
+    // Method to display the list of records
+    @SuppressLint("SetTextI18n")
+    private void displayRecords(List<DataSnapshot> records) {
+        recordList.removeAllViews(); // Clear the list to avoid duplicates
+
+        for (DataSnapshot snapshot : records) {
             String accountNumber = snapshot.child("accountNumber").getValue(String.class);
             String maturityDate = snapshot.child("maturityDate").getValue(String.class);
 

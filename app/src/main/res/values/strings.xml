@@ -122,6 +122,8 @@
     <string name="closed">Closed</string>
     <string name="use_fingerprint">Use Fingerprint</string>
     <string name="delete_record">Delete Record</string>
+    <string name="search">Search</string>
+    <string name="enter_account_number">Enter Account Number</string>
     <string-array name="status_options">
         <item>Active</item>
         <item>Matured</item>
