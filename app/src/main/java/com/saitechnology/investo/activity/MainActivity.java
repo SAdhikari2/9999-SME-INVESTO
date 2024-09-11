@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -24,6 +25,8 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -47,6 +50,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.saitechnology.investo.R;
 import com.saitechnology.investo.util.HeaderFooterPageEvent;
+import com.saitechnology.investo.util.ProfileImageUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AdRequest adRequest = new AdRequest.Builder().build();
         adView1.loadAd(adRequest);
 
+        ImageView userProfileIcon = findViewById(R.id.userProfileIcon);
+        ProfileImageUtil.loadProfileImage(this, userProfileIcon);
+
         assignClickListener(R.id.button_add_investment);
         assignClickListener(R.id.button_view_investment);
         assignClickListener(R.id.button_export_pdf);
@@ -85,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
         mDatabase = FirebaseDatabase.getInstance().getReference().child("InvestmentWarehouse").child(user.getUid());
+        // Make the profile icon clickable
+        ProfileImageUtil.setupProfileIconClick(this, userProfileIcon);
     }
 
     private void assignClickListener(int id) {

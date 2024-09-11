@@ -1,13 +1,10 @@
 package com.saitechnology.investo.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,20 +14,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.saitechnology.investo.R;
+import com.saitechnology.investo.util.ProfileImageUtil;
 
 import java.util.Calendar;
 import java.util.concurrent.Executor;
@@ -42,12 +37,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private GoogleSignInClient googleSignInClient;
-    private ImageView userProfileIcon;
-    private ProgressBar progressBar;
     private SharedPreferences sharedPreferences;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
-    private TextView useFingerprintLink;
+    private ImageView userProfileIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +49,10 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Firebase and UI components
         mAuth = FirebaseAuth.getInstance();
+
         userProfileIcon = findViewById(R.id.userProfileIcon);
-        progressBar = findViewById(R.id.idPBLoading);
+        ProfileImageUtil.loadProfileImage(this, userProfileIcon);
+
         sharedPreferences = getSharedPreferences("login_info", MODE_PRIVATE);
 
         // Initialize Google Sign-In
@@ -72,61 +67,16 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInButton.setOnClickListener(v -> googleSignIn());
 
         // Initialize and set up "Use Fingerprint" link
-        useFingerprintLink = findViewById(R.id.useFingerprintLink);
+        TextView useFingerprintLink = findViewById(R.id.useFingerprintLink);
         useFingerprintLink.setOnClickListener(v -> biometricPrompt.authenticate(promptInfo));
-
-        // Make the profile icon clickable
-        userProfileIcon.setOnClickListener(v -> showBottomSheet());
 
         // Set up Biometric Authentication
         setupBiometricAuthentication();
-
-        // Load user's profile picture if already signed in
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            loadProfilePicture(user);
-        }
-    }
-
-    // Load the profile picture in a circular shape
-    private void loadProfilePicture(FirebaseUser user) {
-        if (user.getPhotoUrl() != null) {
-            Glide.with(this)
-                    .load(user.getPhotoUrl())
-                    .apply(RequestOptions.circleCropTransform())  // Circular image
-                    .placeholder(R.drawable.baseline_account_circle_24)  // Default image
-                    .into(userProfileIcon);
-        }
-    }
-
-    // Show bottom sheet with logout and dismiss options
-    private void showBottomSheet() {
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(LoginActivity.this);
-        @SuppressLint("InflateParams")
-        View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_profile, null);
-        bottomSheetDialog.setContentView(bottomSheetView);
-
-        bottomSheetView.findViewById(R.id.logout).setOnClickListener(v -> {
-            logoutUser();
-            bottomSheetDialog.dismiss();
-        });
-
-        bottomSheetView.findViewById(R.id.dismiss).setOnClickListener(v -> bottomSheetDialog.dismiss());
-
-        bottomSheetDialog.show();
-    }
-
-    // Handle logout
-    private void logoutUser() {
-        FirebaseAuth.getInstance().signOut();
-        Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(LoginActivity.this, LogoutActivity.class));
-        finish();
+        ProfileImageUtil.setupProfileIconClick(this, userProfileIcon);
     }
 
     // Start Google Sign-In process
     private void googleSignIn() {
-        progressBar.setVisibility(View.VISIBLE);
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -144,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             } catch (ApiException e) {
                 e.printStackTrace();
-                progressBar.setVisibility(View.GONE);
             }
         }
     }
@@ -154,13 +103,12 @@ public class LoginActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
-                    progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
                             // Save the last login timestamp
                             sharedPreferences.edit().putLong("last_login_timestamp", Calendar.getInstance().getTimeInMillis()).apply();
-                            loadProfilePicture(user);
+                            ProfileImageUtil.loadProfileImage(this, userProfileIcon);
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         }
@@ -197,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        biometricPrompt.authenticate(promptInfo);
 
         // If user is already signed in, check for fingerprint authentication
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -204,11 +153,11 @@ public class LoginActivity extends AppCompatActivity {
             long lastLoginTimestamp = sharedPreferences.getLong("last_login_timestamp", 0);
             long currentTime = Calendar.getInstance().getTimeInMillis();
             if ((currentTime - lastLoginTimestamp) < FINGERPRINT_AUTH_TIMEOUT) {
-                // Automatically authenticate using fingerprint without clicking the link
+                // Automatically authenticate using fingerprint when the app starts
                 biometricPrompt.authenticate(promptInfo);  // Authenticate using fingerprint
             } else {
                 // If fingerprint timeout, load the user's profile picture and continue normally with Google Sign-In
-                loadProfilePicture(currentUser);
+                ProfileImageUtil.loadProfileImage(this, userProfileIcon);
             }
         }
     }

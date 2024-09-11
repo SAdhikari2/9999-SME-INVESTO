@@ -1,6 +1,7 @@
 package com.saitechnology.investo.activity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +26,9 @@ public class InvestmentDetailActivity extends AppCompatActivity {
 
     private TextView accountNumberView, depositAmountView, maturityAmountView, bankNameView,
             branchNameView, depositDateView, maturityDateView, statusView, remarksView;
+
+    private DatabaseReference databaseReference;
+    private String investmentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +49,31 @@ public class InvestmentDetailActivity extends AppCompatActivity {
         // Get the current user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            loadInvestmentDetails(user.getUid());
+            String userId = user.getUid();
+            loadInvestmentDetails(userId);
         }
-        // Add this in the InvestmentDetailActivity where you want to trigger the update
+
+        // Update button to navigate to UpdateInvestmentActivity
         Button updateDetailsButton = findViewById(R.id.updateButton);
         updateDetailsButton.setOnClickListener(v -> {
             Intent intent = new Intent(InvestmentDetailActivity.this, UpdateInvestmentActivity.class);
-            intent.putExtra("investmentId", getIntent().getStringExtra("investmentId"));
+            intent.putExtra("investmentId", investmentId); // Pass the investmentId
             startActivity(intent);
         });
 
+        // Delete button to delete the record
+        Button deleteButton = findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(v -> showDeleteConfirmationDialog());
     }
 
     private void loadInvestmentDetails(String userId) {
-        String investmentId = getIntent().getStringExtra("investmentId"); // Get the investmentId from the intent
+        investmentId = getIntent().getStringExtra("investmentId"); // Get the investmentId from the intent
         if (investmentId == null) {
             Toast.makeText(this, "Investment ID not found", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
+        databaseReference = FirebaseDatabase.getInstance().getReference()
                 .child("InvestmentWarehouse")
                 .child(userId)
                 .child(investmentId); // Access the specific investment ID
@@ -106,4 +116,27 @@ public class InvestmentDetailActivity extends AppCompatActivity {
         });
     }
 
+    // Show confirmation dialog before deletion
+    private void showDeleteConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Record")
+                .setMessage("Are you sure you want to delete this record?")
+                .setPositiveButton("Confirm", (dialog, which) -> deleteRecord())
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
+    }
+
+    // Delete record from Firebase
+    private void deleteRecord() {
+        if (investmentId != null) {
+            databaseReference.removeValue()
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(InvestmentDetailActivity.this, "Record deleted successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(InvestmentDetailActivity.this, MainActivity.class));
+                        finish();
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(InvestmentDetailActivity.this, "Failed to delete the record", Toast.LENGTH_SHORT).show());
+        }
+    }
 }
