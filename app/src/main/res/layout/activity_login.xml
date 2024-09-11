@@ -119,15 +119,4 @@
 
     </LinearLayout>
 
-    <!-- Loading spinner (hidden by default) -->
-    <ProgressBar
-        android:id="@+id/idPBLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
