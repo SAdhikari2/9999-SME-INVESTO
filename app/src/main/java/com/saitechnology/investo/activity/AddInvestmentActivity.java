@@ -4,9 +4,11 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,10 +31,11 @@ import java.util.Locale;
 
 public class AddInvestmentActivity extends AppCompatActivity {
     private Button btnDepositDate, btnMaturityDate;
-    private EditText accountNumberEditText, bankNameEditText, branchNameEditText, depositAmountEditText, maturityAmountEditText, statusEditText, remarksEditText;
+    private EditText accountNumberEditText, bankNameEditText, branchNameEditText, depositAmountEditText, maturityAmountEditText, remarksEditText;
     private DatabaseReference databaseReference;
     private int selectedYear, selectedMonth, selectedDay;
     private int selectedEndYear, selectedEndMonth, selectedEndDay;
+    private Spinner statusSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +53,15 @@ public class AddInvestmentActivity extends AppCompatActivity {
         remarksEditText = findViewById(R.id.specialNoteEditText);
         depositAmountEditText = findViewById(R.id.depositAmountEditText);
         maturityAmountEditText = findViewById(R.id.maturityAmountEditText);
-        statusEditText = findViewById(R.id.statusEditText);
+        statusSpinner = findViewById(R.id.statusSpinner);
         btnDepositDate = findViewById(R.id.depositDateBtn);
         btnMaturityDate = findViewById(R.id.maturityDateBtn);
+
+        // Setup the spinner with status options
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.status_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusSpinner.setAdapter(adapter);
 
         ImageView userProfileIcon = findViewById(R.id.userProfileIcon);
         ProfileImageUtil.loadProfileImage(this, userProfileIcon);
@@ -90,7 +99,7 @@ public class AddInvestmentActivity extends AppCompatActivity {
         String specialNote = remarksEditText.getText().toString().trim();
         String depositAmount = depositAmountEditText.getText().toString().trim();
         String maturityAmount = maturityAmountEditText.getText().toString().trim();
-        String status = statusEditText.getText().toString().trim();
+        String status = statusSpinner.getSelectedItem().toString();
 
         InvestmentWarehouse investmentWarehouse =
                 InvestmentWarehouse.builder()

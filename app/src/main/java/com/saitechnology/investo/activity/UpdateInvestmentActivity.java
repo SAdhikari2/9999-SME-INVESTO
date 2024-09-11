@@ -3,8 +3,11 @@ package com.saitechnology.investo.activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,11 +35,12 @@ public class UpdateInvestmentActivity extends AppCompatActivity {
 
     private EditText accountNumberView, depositAmountView, maturityAmountView;
     private EditText bankNameView, branchNameView, depositDateView, maturityDateView;
-    private EditText statusView, remarksView;
+    private EditText remarksView;
     private DatabaseReference databaseReference;
     private SimpleDateFormat dateFormat;
     private Calendar depositCalendar;
     private Calendar maturityCalendar;
+    private Spinner statusSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,14 @@ public class UpdateInvestmentActivity extends AppCompatActivity {
         branchNameView = findViewById(R.id.branchNameView);
         depositDateView = findViewById(R.id.depositDateView);
         maturityDateView = findViewById(R.id.maturityDateView);
-        statusView = findViewById(R.id.statusView);
+        statusSpinner = findViewById(R.id.statusSpinner);
         remarksView = findViewById(R.id.remarksView);
+
+        // Setup the spinner with status options
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.status_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusSpinner.setAdapter(adapter);
 
         ImageView userProfileIcon = findViewById(R.id.userProfileIcon);
         ProfileImageUtil.loadProfileImage(this, userProfileIcon);
@@ -110,7 +120,6 @@ public class UpdateInvestmentActivity extends AppCompatActivity {
                     maturityAmountView.setText(getStringValue(snapshot, "maturityAmount"));
                     bankNameView.setText(getStringValue(snapshot, "bankName"));
                     branchNameView.setText(getStringValue(snapshot, "branchName"));
-                    statusView.setText(getStringValue(snapshot, "status"));
                     remarksView.setText(getStringValue(snapshot, "remarks"));
 
                     // Parse and set deposit date
@@ -126,11 +135,21 @@ public class UpdateInvestmentActivity extends AppCompatActivity {
                     // Parse and set maturity date
                     String maturityDateStr = getStringValue(snapshot, "maturityDate");
                     try {
-                        maturityCalendar.setTime(dateFormat.parse(maturityDateStr));
+                        maturityCalendar.setTime(Objects.requireNonNull(dateFormat.parse(maturityDateStr)));
                         maturityDateView.setText(maturityDateStr);
                     } catch (ParseException e) {
                         maturityDateView.setText("");
                         e.printStackTrace();
+                    }
+
+                    // Set spinner selection based on the status from Firebase
+                    String status = getStringValue(snapshot, "status");
+                    SpinnerAdapter adapter = statusSpinner.getAdapter();
+                    for (int i = 0; i < adapter.getCount(); i++) {
+                        if (adapter.getItem(i).toString().equals(status)) {
+                            statusSpinner.setSelection(i);
+                            break;
+                        }
                     }
                 } else {
                     Toast.makeText(UpdateInvestmentActivity.this, "Investment details not found", Toast.LENGTH_SHORT).show();
@@ -192,37 +211,13 @@ public class UpdateInvestmentActivity extends AppCompatActivity {
         String branchName = branchNameView.getText().toString().trim();
         String depositDateStr = depositDateView.getText().toString().trim();
         String maturityDateStr = maturityDateView.getText().toString().trim();
-        String status = statusView.getText().toString().trim();
+        String status = statusSpinner.getSelectedItem().toString();
         String remarks = remarksView.getText().toString().trim();
 
         // Input Validation
         if (accountNumber.isEmpty()) {
             accountNumberView.setError("Account Number is required");
             accountNumberView.requestFocus();
-            return;
-        }
-
-        if (depositAmountStr.isEmpty()) {
-            depositAmountView.setError("Deposit Amount is required");
-            depositAmountView.requestFocus();
-            return;
-        }
-
-        if (maturityAmountStr.isEmpty()) {
-            maturityAmountView.setError("Maturity Amount is required");
-            maturityAmountView.requestFocus();
-            return;
-        }
-
-        if (bankName.isEmpty()) {
-            bankNameView.setError("Bank Name is required");
-            bankNameView.requestFocus();
-            return;
-        }
-
-        if (branchName.isEmpty()) {
-            branchNameView.setError("Branch Name is required");
-            branchNameView.requestFocus();
             return;
         }
 

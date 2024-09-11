@@ -53,89 +53,106 @@
                 android:id="@+id/accountNumberView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/account_number"
+                android:hint="@string/account_investment_id"
                 android:textSize="18sp"
                 android:layout_marginBottom="16dp"
-                android:inputType="text" />
-
-            <!-- Deposit Amount -->
-            <EditText
-                android:id="@+id/depositAmountView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Deposit Amount"
-                android:textSize="18sp"
-                android:layout_marginBottom="16dp"
-                android:inputType="numberDecimal" />
-
-            <!-- Maturity Amount -->
-            <EditText
-                android:id="@+id/maturityAmountView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Maturity Amount"
-                android:textSize="18sp"
-                android:layout_marginBottom="16dp"
-                android:inputType="numberDecimal" />
+                android:background="@drawable/spinner_underline"
+                android:inputType="text"
+                android:autofillHints=""
+                tools:ignore="TextFields" />
 
             <!-- Bank Name -->
             <EditText
                 android:id="@+id/bankNameView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/bank_name"
+                android:hint="@string/bank_firm_name"
                 android:textSize="18sp"
                 android:layout_marginBottom="16dp"
-                android:inputType="text" />
+                android:background="@drawable/spinner_underline"
+                android:inputType="text"
+                android:autofillHints="" />
 
             <!-- Branch Name -->
             <EditText
                 android:id="@+id/branchNameView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Branch Name"
+                android:hint="@string/branch_name"
                 android:textSize="18sp"
                 android:layout_marginBottom="16dp"
-                android:inputType="text" />
+                android:background="@drawable/spinner_underline"
+                android:inputType="text"
+                android:autofillHints="" />
+
+            <!-- Deposit Amount -->
+            <EditText
+                android:id="@+id/depositAmountView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/deposit_amount"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/spinner_underline"
+                android:inputType="numberDecimal"
+                android:autofillHints="" />
+
+            <!-- Maturity Amount -->
+            <EditText
+                android:id="@+id/maturityAmountView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/maturity_amount"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/spinner_underline"
+                android:inputType="numberDecimal"
+                android:autofillHints="" />
 
             <!-- Deposit Date -->
             <EditText
                 android:id="@+id/depositDateView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/deposit_date"
+                android:hint="@string/date_of_deposit"
                 android:textSize="18sp"
                 android:layout_marginBottom="16dp"
-                android:inputType="date" />
+                android:background="@drawable/spinner_underline"
+                android:inputType="date"
+                android:autofillHints="" />
 
             <!-- Maturity Date -->
             <EditText
                 android:id="@+id/maturityDateView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/maturity_date"
+                android:hint="@string/date_of_maturity"
                 android:textSize="18sp"
                 android:layout_marginBottom="16dp"
-                android:inputType="date" />
+                android:background="@drawable/spinner_underline"
+                android:inputType="date"
+                android:autofillHints="" />
 
             <!-- Status -->
-            <EditText
-                android:id="@+id/statusView"
+            <Spinner
+                android:id="@+id/statusSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Status"
-                android:textSize="18sp"
+                android:layout_marginTop="12dp"
+                android:padding="12dp"
                 android:layout_marginBottom="16dp"
-                android:inputType="text" />
+                android:background="@drawable/spinner_underline"
+                android:textSize="18sp" />
 
             <!-- Remarks -->
             <EditText
                 android:id="@+id/remarksView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/remarks"
+                android:hint="@string/remarks_"
                 android:textSize="18sp"
                 android:layout_marginBottom="16dp"
+                android:background="@drawable/spinner_underline"
                 android:inputType="text" />
         </LinearLayout>
     </ScrollView>
