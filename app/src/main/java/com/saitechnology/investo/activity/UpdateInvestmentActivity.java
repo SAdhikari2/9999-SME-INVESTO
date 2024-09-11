@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.saitechnology.investo.R;
+import com.saitechnology.investo.util.ProfileImageUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,6 +61,9 @@ public class UpdateInvestmentActivity extends AppCompatActivity {
         statusView = findViewById(R.id.statusView);
         remarksView = findViewById(R.id.remarksView);
 
+        ImageView userProfileIcon = findViewById(R.id.userProfileIcon);
+        ProfileImageUtil.loadProfileImage(this, userProfileIcon);
+
         // Get investment ID passed from the previous activity
         String investmentId = getIntent().getStringExtra("investmentId");
 
@@ -88,6 +93,8 @@ public class UpdateInvestmentActivity extends AppCompatActivity {
 
         // Set up the update button click listener
         findViewById(R.id.updateButton).setOnClickListener(v -> updateInvestmentDetails());
+        // Make the profile icon clickable
+        ProfileImageUtil.setupProfileIconClick(this, userProfileIcon);
     }
 
     /**

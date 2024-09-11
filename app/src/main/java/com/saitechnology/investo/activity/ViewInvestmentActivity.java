@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.saitechnology.investo.R;
+import com.saitechnology.investo.util.ProfileImageUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,6 +52,9 @@ public class ViewInvestmentActivity extends AppCompatActivity {
         checkBoxActive = findViewById(R.id.checkBoxActive);
         checkBoxMatured = findViewById(R.id.checkBoxMatured);
         checkBoxClosed = findViewById(R.id.checkBoxClosed);
+
+        ImageView userProfileIcon = findViewById(R.id.userProfileIcon);
+        ProfileImageUtil.loadProfileImage(this, userProfileIcon);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
@@ -85,6 +90,8 @@ public class ViewInvestmentActivity extends AppCompatActivity {
         checkBoxActive.setOnCheckedChangeListener((buttonView, isChecked) -> filterAndDisplayRecords());
         checkBoxMatured.setOnCheckedChangeListener((buttonView, isChecked) -> filterAndDisplayRecords());
         checkBoxClosed.setOnCheckedChangeListener((buttonView, isChecked) -> filterAndDisplayRecords());
+        // Make the profile icon clickable
+        ProfileImageUtil.setupProfileIconClick(this, userProfileIcon);
     }
 
     // Method to filter and display records based on selected checkboxes

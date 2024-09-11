@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.saitechnology.investo.R;
 import com.saitechnology.investo.entity.InvestmentWarehouse;
+import com.saitechnology.investo.util.ProfileImageUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -52,6 +54,9 @@ public class AddInvestmentActivity extends AppCompatActivity {
         btnDepositDate = findViewById(R.id.depositDateBtn);
         btnMaturityDate = findViewById(R.id.maturityDateBtn);
 
+        ImageView userProfileIcon = findViewById(R.id.userProfileIcon);
+        ProfileImageUtil.loadProfileImage(this, userProfileIcon);
+
         Button addInvestmentButton = findViewById(R.id.addInvestment);
 
         // Get current user
@@ -69,6 +74,8 @@ public class AddInvestmentActivity extends AppCompatActivity {
         btnMaturityDate.setOnClickListener(this::maturityDate);
         // Set click listener for the update profile button
         addInvestmentButton.setOnClickListener(v -> addInvestment());
+        // Make the profile icon clickable
+        ProfileImageUtil.setupProfileIconClick(this, userProfileIcon);
     }
 
     private void addInvestment() {
