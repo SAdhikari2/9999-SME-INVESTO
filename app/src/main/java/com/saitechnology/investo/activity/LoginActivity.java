@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
-    private TextView useFingerprintLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInButton.setOnClickListener(v -> googleSignIn());
 
         // Initialize and set up "Use Fingerprint" link
-        useFingerprintLink = findViewById(R.id.useFingerprintLink);
+        TextView useFingerprintLink = findViewById(R.id.useFingerprintLink);
         useFingerprintLink.setOnClickListener(v -> biometricPrompt.authenticate(promptInfo));
 
         // Make the profile icon clickable
@@ -197,6 +196,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        biometricPrompt.authenticate(promptInfo);
 
         // If user is already signed in, check for fingerprint authentication
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -204,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
             long lastLoginTimestamp = sharedPreferences.getLong("last_login_timestamp", 0);
             long currentTime = Calendar.getInstance().getTimeInMillis();
             if ((currentTime - lastLoginTimestamp) < FINGERPRINT_AUTH_TIMEOUT) {
-                // Automatically authenticate using fingerprint without clicking the link
+                // Automatically authenticate using fingerprint when the app starts
                 biometricPrompt.authenticate(promptInfo);  // Authenticate using fingerprint
             } else {
                 // If fingerprint timeout, load the user's profile picture and continue normally with Google Sign-In
