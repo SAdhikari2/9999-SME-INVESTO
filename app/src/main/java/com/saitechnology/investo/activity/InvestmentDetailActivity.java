@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.saitechnology.investo.R;
+import com.saitechnology.investo.util.ProfileImageUtil;
 
 public class InvestmentDetailActivity extends AppCompatActivity {
 
     private TextView accountNumberView, depositAmountView, maturityAmountView, bankNameView,
             branchNameView, depositDateView, maturityDateView, statusView, remarksView;
-
     private DatabaseReference databaseReference;
     private String investmentId;
 
@@ -46,6 +47,9 @@ public class InvestmentDetailActivity extends AppCompatActivity {
         statusView = findViewById(R.id.statusView);
         remarksView = findViewById(R.id.remarksView);
 
+        ImageView userProfileIcon = findViewById(R.id.userProfileIcon);
+        ProfileImageUtil.loadProfileImage(this, userProfileIcon);
+
         // Get the current user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -64,6 +68,8 @@ public class InvestmentDetailActivity extends AppCompatActivity {
         // Delete button to delete the record
         Button deleteButton = findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(v -> showDeleteConfirmationDialog());
+        // Make the profile icon clickable
+        ProfileImageUtil.setupProfileIconClick(this, userProfileIcon);
     }
 
     private void loadInvestmentDetails(String userId) {
